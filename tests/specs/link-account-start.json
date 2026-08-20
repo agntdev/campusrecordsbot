@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Begin account linking process with student ID and verification code"
+              "text": "Enter your student ID."
             }
           }
         ],

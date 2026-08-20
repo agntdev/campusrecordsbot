@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Search and edit existing student records"
+              "text": "Only authorised staff can manage student records."
             }
           }
         ],
