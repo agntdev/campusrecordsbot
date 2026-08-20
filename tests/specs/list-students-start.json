@@ -1,0 +1,20 @@
+[
+  {
+    "name": "List by Status",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "View students filtered by Active/Exit Exam/Graduating status"
+            }
+          }
+        ],
+        "send": {
+          "callback": "list_students:start"
+        }
+      }
+    ]
+  }
+]
