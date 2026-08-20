@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View students filtered by Active/Exit Exam/Graduating status"
+              "text": "Only authorised staff can manage student records."
             }
           }
         ],

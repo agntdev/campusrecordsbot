@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Initiate student record creation workflow"
+              "text": "Only authorised staff can manage student records."
             }
           }
         ],

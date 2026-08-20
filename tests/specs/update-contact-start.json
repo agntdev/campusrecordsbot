@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Modify contact information and preferred communication method"
+              "text": "Link your account before updating contact information."
             }
           }
         ],

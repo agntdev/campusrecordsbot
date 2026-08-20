@@ -1,17 +1,18 @@
 import { Composer } from "grammy";
+import type { Ctx } from "../bot.js";
+import { registerMainMenuItem } from "../toolkit/index.js";
+import { getStudent, mappingFor } from "../student-data.js";
 
-// SCAFFOLD — generated from the bot blueprint BEFORE the agent runs.
-// Keep a LIVE registration (.command / .callbackQuery / …) so this feature is
-// never an empty stub. Replace the reply body with real logic + copy; if you
-// change the user-facing text, update tests/specs to match EXACTLY.
-// Do NOT rewrite src/bot.ts — buildBot() already auto-loads this module.
-// Menu: wire this into /start via registerMainMenuItem({ label: "View My Record", data: "view_record:start" }) if the toolkit exposes it.
-
-const composer = new Composer();
+registerMainMenuItem({ label: "View my record", data: "view_record:start", order: 50 });
+const composer = new Composer<Ctx>();
 
 composer.callbackQuery("view_record:start", async (ctx) => {
   await ctx.answerCallbackQuery();
-  await ctx.reply("Display student's own record with limited fields");
+  const mapping = await mappingFor(ctx);
+  if (!mapping?.verified) return void await ctx.reply("Link your account before viewing your record.");
+  const student = await getStudent(ctx, mapping.student_id);
+  if (!student) return void await ctx.reply("Your linked record is unavailable. Contact your institution.");
+  await ctx.reply(`Your record\nName: ${student.name}\nProgram: ${student.program}\nStatus: ${student.status}\nContact: ${student.contact_info}\nPreferred contact: ${student.preferred_contact}`);
 });
 
 export default composer;

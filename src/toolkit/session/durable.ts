@@ -144,6 +144,22 @@ export class ChatDO {
       }
     }
 
+    // Small indexed domain documents used by feature repositories. This uses the
+    // same Durable Object storage as sessions but is intentionally a separate
+    // namespace: records survive conversation resets and are never enumerated.
+    if (url.pathname === "/data") {
+      const key = url.searchParams.get("key");
+      if (!key) return new Response("missing key", { status: 400 });
+      if (request.method === "GET") {
+        const value = await this.state.storage.get<unknown>("data:" + key);
+        return value === undefined ? new Response(null, { status: 204 }) : Response.json(value);
+      }
+      if (request.method === "PUT") {
+        await this.state.storage.put("data:" + key, await request.json());
+        return new Response(null, { status: 204 });
+      }
+    }
+
     // Schedule a reminder + (re)arm the alarm to the earliest due one.
     if (url.pathname === "/remind" && request.method === "POST") {
       const rem = (await request.json()) as Reminder;

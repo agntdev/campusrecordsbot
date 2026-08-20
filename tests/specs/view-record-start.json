@@ -7,7 +7,7 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Display student's own record with limited fields"
+              "text": "Link your account before viewing your record."
             }
           }
         ],
